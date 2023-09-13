@@ -1,25 +1,68 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import Lottery from './Component/Lottery';
+import Final from './Component/Final';
+import { getRandomNumber } from './Helper/utils';
+import { registerTicket, removeTicket, finish, reset} from './Helper/actions';
+
+
+
+
+class App extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      winningNumber: getRandomNumber(),
+      tickets: [],
+      remainingTickets: 5,
+      finished: false
+    };
+
+    this.registerTicket = registerTicket.bind(this);
+    this.removeTicket = removeTicket.bind(this);
+    this.finish = finish.bind(this);
+    this.reset = reset.bind( this );
+    
+  }
+
+  renderApp() {
+    const { tickets, remainingTickets, finished, winningNumber } = this.state;
+    const actions = {};
+
+    if (finished) {
+      actions.reset = this.reset;
+      
+      return (
+        <Final
+          actions = {actions}
+          tickets={tickets}
+          winningNumber={ winningNumber }
+        />
+      )
+    }
+
+    actions.registerTicket = this.registerTicket;
+    actions.removeTicket = this.removeTicket;
+    actions.finish = this.finish;
+
+    return (
+      <Lottery
+        actions = { actions }
+        tickets = { tickets }
+        remainingTickets  = { remainingTickets }
+      />
+    );
+  }
+
+  render() {
+    console.log( this.state.tickets);
+    return (
+      <div className='App'>
+        { this.renderApp() }
+      </div>
+    );
+  }
 }
 
 export default App;
