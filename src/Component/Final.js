@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import '../App.css';
 import { getRandomColor } from '../Helper/utils';
 
 class Final extends Component {
@@ -38,7 +38,7 @@ class Final extends Component {
   render() {
 
     return (
-      <div style={{ background: getRandomColor(), padding: 15 }}>
+      <div className='Final-box' style={{ background: getRandomColor()}}>
         {this.isWinning() ? this.renderWinning() : this.renderTryAgain()}
         <button onClick={this.props.actions.reset}>НОВО ТЕГЛЕНЕ</button>
       </div>

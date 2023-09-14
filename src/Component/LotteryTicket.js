@@ -1,31 +1,23 @@
 import React, { Component } from 'react';
+import '../App.css';
+
 
 class LotteryTicket extends Component {
   render() {
     const { actions, index, number, color } = this.props;
 
     return (
-      <div style={{
-        display: 'flex',
-        justifyContent: 'space-evenly',
-        backgroundColor: color,
-        padding: 5,
-        width: '60vw',
-        margin: 'auto'
-      }}
-      >
-        <button
-          style={{ textAlign: 'left' }}
+      <div className='LT-box-ticket' style={{ backgroundColor: color, }}>
+        
+        <button className='LT-button'
           onClick={() => { actions.removeTicket(index)}}
         >
           X
         </button>  
-        <small> Това билетче има числото: <span style={{width: '10px', fontWeight: 'bold' }}>{ number }</span></small>
+        <small> Това билетче има числото: <span className='LT-numTicket'>{ number }</span></small>
       </div>
     );
-  
   }
-
 };
 
 export default LotteryTicket;
