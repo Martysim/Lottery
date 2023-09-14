@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import '../App.css';
 import LotteryTicket from './LotteryTicket';
 
 class Lottery  extends Component {
@@ -35,7 +35,7 @@ class Lottery  extends Component {
   
   render() {
     return (
-      <div style={{ textAlign: 'center' }}>
+      <div  className='Lottery-ticket'>
         <h2>Лотария</h2>
         { this.renderButton() }
         <br />
@@ -47,7 +47,6 @@ class Lottery  extends Component {
       </div>
     );
   }
-
 };
 
 export default Lottery;
